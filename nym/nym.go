@@ -30,11 +30,10 @@ const (
 
 var ansi = regexp.MustCompile(`\x1b\[[0-9;]*m`)
 
-// Home is $NYM_HOME or ~/.nym.
+// Home is ~/.nym, where nym-socks5-client keeps its clients. (The release
+// binary ignores $NYM_HOME, so cosmosmix does too, or it would look for the
+// config in a place the client never wrote to.)
 func Home() string {
-	if h := os.Getenv("NYM_HOME"); h != "" {
-		return h
-	}
 	home, _ := os.UserHomeDir()
 	return filepath.Join(home, ".nym")
 }

@@ -1,6 +1,7 @@
 package nym
 
 import (
+	"path/filepath"
 	"strings"
 	"testing"
 )
@@ -18,5 +19,17 @@ func TestPatchConfigText(t *testing.T) {
 	}
 	if changed, again := PatchConfigText(out); changed || again != out {
 		t.Fatal("patch is not idempotent")
+	}
+}
+
+// nym-socks5-client ignores $NYM_HOME and always writes under ~/.nym, so the
+// config path must not follow NYM_HOME either.
+func TestConfigPathIgnoresNymHome(t *testing.T) {
+	home := t.TempDir()
+	t.Setenv("HOME", home)
+	t.Setenv("NYM_HOME", filepath.Join(home, "elsewhere"))
+	want := filepath.Join(home, ".nym", "socks5-clients", "cosmosmix", "config", "config.toml")
+	if got := ConfigPath("cosmosmix"); got != want {
+		t.Fatalf("ConfigPath = %s, want %s", got, want)
 	}
 }
