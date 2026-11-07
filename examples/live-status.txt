@@ -1,0 +1,21 @@
+# 2026-11-07T07:25:38Z cosmosmix CLI over the real Nym mainnet mixnet (exit node 1981, AU)
+
+$ cosmosmix status --chain nyx
+[   3.67s] dns  rpc.nymtech.net -> [194.182.169.49 91.92.200.116] (DoH via 1.1.1.1, over the mixnet, 3.67s)
+[   3.67s] dial rpc.nymtech.net:443 -> socks5 127.0.0.1:1086 -> mixnet -> exit -> 194.182.169.49:443
+[   3.67s] open rpc.nymtech.net:443 socks5 CONNECT accepted by the local mixnet client in 0.00s
+[   6.44s] up   rpc.nymtech.net status answered HTTP 200 in 6.44s
+nyx (chain id nyx): block 26440468 at 2026-11-07T07:25:38Z, 7s old (via rpc.nymtech.net over the mixnet)
+(wall time 6.4 s)
+
+$ cosmosmix status --chain osmosis
+osmosis (chain id osmosis-1): block 74371391 at 2026-11-07T07:25:48Z, 2s old (via osmosis-rpc.publicnode.com over the mixnet)
+(wall time 5.0 s)
+
+$ cosmosmix status --chain cosmoshub
+cosmoshub (chain id cosmoshub-4): block 33765070 at 2026-11-07T07:25:44Z, 12s old (via cosmos-rpc.publicnode.com over the mixnet)
+(wall time 6.1 s)
+
+$ cosmosmix status --chain celestia
+celestia (chain id celestia): block 15666516 at 2026-11-07T07:25:54Z, 7s old (via celestia-rpc.publicnode.com over the mixnet)
+(wall time 4.4 s)

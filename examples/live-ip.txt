@@ -1,0 +1,6 @@
+$ cosmosmix ip -v
+[   2.45s] dns  api.ipify.org -> [104.26.13.205 104.26.12.205 172.67.74.152] (DoH via 1.1.1.1, over the mixnet, 2.45s)
+[   2.45s] dial api.ipify.org:443 -> socks5 127.0.0.1:1086 -> mixnet -> exit -> 172.67.74.152:443
+[   2.46s] open api.ipify.org:443 socks5 CONNECT accepted by the local mixnet client in 0.00s
+https://api.ipify.org sees this request coming from 203.96.177.107 (4.68s over the mixnet)
+= Nym node 1981 (AU, exit gateway: true) in the nym-api node list

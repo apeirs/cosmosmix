@@ -1,0 +1,8 @@
+# 2026-11-07T07:25:15Z real Nym mainnet mixnet, nym-socks5-client (build 2026-10-01), client id cosmosmix, SOCKS5 127.0.0.1:1086
+$ cosmosmix nym setup --port 1086
+exit gateway: node 1981 (AU) perf=0.99 version=1.43.0, picked at random from 99
+id                 cosmosmix
+socks5             127.0.0.1:1086
+provider           2EsvRaMs1zg1tSPT1y6dkd6d6X2GdnGHRvYfUsPoQvbf.3jfEH8SB84D5ynakztSENx4KTsz4sASCyzVHndEHqCkF@AG1jucgspds2xXJAftZHr7tqf3haPNjWLyRsn9NzfWje
+anonymous_replies  true
+gateway            8j3kbDrnGh13JCbGAocgdxG4LupirFAaA4y4weUSTfqD

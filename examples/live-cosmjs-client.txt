@@ -1,0 +1,9 @@
+# 2026-11-07T07:36:12Z unmodified @cosmjs/stargate + @cosmjs/tendermint-rpc 0.32.4 (node v26.8.1) against cosmosmix serve
+$ node cosmjs-client.mjs
+[13.4s] StargateClient.connect("http://127.0.0.1:26657/nyx/rpc"): chainId=nyx height=26440581 n10c7h7wae… 9996089 unym
+[14.6s] broadcastTxSync(8 junk bytes) rejected by the node: Broadcasting transaction failed with code 2 (codespace: sdk). Log: invalid length; unexpected EOF: tx parse error: tx parse error
+[25.7s] StargateClient.connect("http://127.0.0.1:26657/osmosis/rpc"): chainId=osmosis-1 height=74372174 osmo1jv65s… 72993696193825 uosmo
+[30.9s] websocket NewBlockHeader via ws://127.0.0.1:26657/nyx/rpc/websocket: height=26440585 time=2026-11-07T07:36:37.787Z
+[36.5s] websocket NewBlockHeader via ws://127.0.0.1:26657/nyx/rpc/websocket: height=26440586 time=2026-11-07T07:36:43.322Z
+[42.0s] websocket NewBlockHeader via ws://127.0.0.1:26657/nyx/rpc/websocket: height=26440587 time=2026-11-07T07:36:48.953Z
+[42.0s] done

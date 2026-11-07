@@ -1,0 +1,60 @@
+08:28:20 cosmosmix gateway on http://127.0.0.1:26657  (default chain "nyx"; SOCKS5 127.0.0.1:1086)
+08:28:20 cosmosmix REST gateway on http://127.0.0.1:1317  (default chain "nyx"; SOCKS5 127.0.0.1:1086)
+08:28:45 nyx rpc status -> mixnet -> rpc.nymtech.net HTTP 200, 1108 bytes in 5.6s
+08:28:46 nyx rpc abci_query -> mixnet -> rpc.nymtech.net HTTP 200, 177 bytes in 1.1s
+08:28:51 osmosis rpc abci_info -> mixnet -> osmosis-rpc.publicnode.com HTTP 200, 187 bytes in 5.2s
+08:29:01 cosmoshub rest rest /cosmos/base/tendermint/v1beta1/blocks/latest -> mixnet -> cosmos-rest.publicnode.com HTTP 200, 137927 bytes in 9.7s
+08:29:08 celestia rest rest /cosmos/bank/v1beta1/supply/by_denom -> mixnet -> celestia-rest.publicnode.com HTTP 200, 55 bytes in 7.3s
+08:29:14 nyx rest rest /cosmos/bank/v1beta1/balances/* -> mixnet -> api.nymtech.net HTTP 200, 93 bytes in 5.4s
+08:29:15 nyx rpc status -> mixnet -> rpc.nymtech.net HTTP 200, 1107 bytes in 1.1s
+08:29:16 nyx rpc health -> mixnet -> rpc.nymtech.net HTTP 200, 37 bytes in 1.2s
+08:29:38 nyx rpc status -> mixnet -> rpc.nymtech.net HTTP 200, 1118 bytes in 1.3s
+08:29:39 nyx rpc status -> mixnet -> rpc.nymtech.net HTTP 200, 1118 bytes in 1.1s
+08:29:40 nyx rpc status -> mixnet -> rpc.nymtech.net HTTP 200, 1118 bytes in 1.0s
+08:29:42 nyx rpc status -> mixnet -> rpc.nymtech.net HTTP 200, 1118 bytes in 1.4s
+08:29:43 nyx rpc status -> mixnet -> rpc.nymtech.net HTTP 200, 1118 bytes in 1.0s
+08:29:44 nyx rpc abci_query -> mixnet -> rpc.nymtech.net HTTP 200, 196 bytes in 1.1s
+08:29:45 nyx rpc broadcast_tx_sync -> mixnet -> rpc.nymtech.net HTTP 200, 228 bytes in 1.1s
+08:29:46 osmosis rpc status -> mixnet -> osmosis-rpc.publicnode.com HTTP 200, 1106 bytes in 1.3s
+08:29:47 osmosis rpc status -> mixnet -> osmosis-rpc.publicnode.com HTTP 200, 1106 bytes in 0.9s
+08:29:49 osmosis rpc status -> mixnet -> osmosis-rpc.publicnode.com HTTP 200, 1106 bytes in 1.2s
+08:29:50 osmosis rpc status -> mixnet -> osmosis-rpc.publicnode.com HTTP 200, 1106 bytes in 1.0s
+08:29:51 osmosis rpc status -> mixnet -> osmosis-rpc.publicnode.com HTTP 200, 1106 bytes in 1.0s
+08:29:51 osmosis rpc abci_query -> mixnet -> osmosis-rpc.publicnode.com HTTP 200, 209 bytes in 0.8s
+08:30:01 nyx rpc websocket FAILED after 10.0s: rpc.nymtech.net: upgrade refused: HTTP 404
+nym-rpc.polkachu.com: upgrade refused: HTTP 404
+rpc.nyx.nodes.guru: no SOCKS5 proxy (nym-socks5-client) listening; refusing to fall back to a direct connection (127.0.0.1:1086: dial tcp 127.0.0.1:1086: operation was canceled)
+08:30:13 nyx rpc websocket FAILED after 11.9s: rpc.nymtech.net: upgrade refused: HTTP 404
+nym-rpc.polkachu.com: upgrade refused: HTTP 404
+08:34:51 nyx rpc websocket -> mixnet -> rpc.nymtech.net open in 6.8s
+08:35:20 nyx rpc websocket closed after 37s
+# --- gateway restarted with the ctx-cancel error fix; the two websocket FAILED lines above came from a test script that requested /nyx/rpc/websocket/websocket ---
+08:36:07 cosmosmix REST gateway on http://127.0.0.1:1317  (default chain "nyx"; SOCKS5 127.0.0.1:1086)
+08:36:07 cosmosmix gateway on http://127.0.0.1:26657  (default chain "nyx"; SOCKS5 127.0.0.1:1086)
+08:36:20 nyx rpc status -> mixnet -> rpc.nymtech.net HTTP 200, 1118 bytes in 7.5s
+08:36:22 nyx rpc status -> mixnet -> rpc.nymtech.net HTTP 200, 1118 bytes in 1.3s
+08:36:23 nyx rpc status -> mixnet -> rpc.nymtech.net HTTP 200, 1118 bytes in 1.2s
+08:36:24 nyx rpc status -> mixnet -> rpc.nymtech.net HTTP 200, 1118 bytes in 1.1s
+08:36:25 nyx rpc status -> mixnet -> rpc.nymtech.net HTTP 200, 1118 bytes in 1.1s
+08:36:26 nyx rpc abci_query -> mixnet -> rpc.nymtech.net HTTP 200, 196 bytes in 1.2s
+08:36:27 nyx rpc broadcast_tx_sync -> mixnet -> rpc.nymtech.net HTTP 200, 228 bytes in 1.1s
+08:36:33 osmosis rpc status -> mixnet -> osmosis-rpc.publicnode.com HTTP 200, 1106 bytes in 5.7s
+08:36:34 osmosis rpc status -> mixnet -> osmosis-rpc.publicnode.com HTTP 200, 1106 bytes in 1.1s
+08:36:35 osmosis rpc status -> mixnet -> osmosis-rpc.publicnode.com HTTP 200, 1106 bytes in 1.1s
+08:36:36 osmosis rpc status -> mixnet -> osmosis-rpc.publicnode.com HTTP 200, 1105 bytes in 1.0s
+08:36:37 osmosis rpc status -> mixnet -> osmosis-rpc.publicnode.com HTTP 200, 1106 bytes in 0.9s
+08:36:38 osmosis rpc abci_query -> mixnet -> osmosis-rpc.publicnode.com HTTP 200, 209 bytes in 1.2s
+08:36:42 nyx rpc websocket -> mixnet -> rpc.nymtech.net open in 3.1s
+08:36:55 nyx rpc websocket closed after 16s
+# --- gateway restarted: errors no longer carry the request URL; no more upstreams are tried once the SOCKS5 proxy is known to be down ---
+08:37:57 cosmosmix gateway on http://127.0.0.1:26657  (default chain "nyx"; SOCKS5 127.0.0.1:1086)
+08:37:57 cosmosmix REST gateway on http://127.0.0.1:1317  (default chain "nyx"; SOCKS5 127.0.0.1:1086)
+08:38:18 nyx rpc status -> mixnet -> rpc.nymtech.net HTTP 200, 1108 bytes in 7.0s
+08:38:25 osmosis rpc status -> mixnet -> osmosis-rpc.publicnode.com HTTP 200, 1096 bytes in 6.3s
+08:38:34 cosmoshub rpc status -> mixnet -> cosmos-rpc.publicnode.com HTTP 200, 1098 bytes in 9.3s
+08:38:44 celestia rpc status -> mixnet -> celestia-rpc.publicnode.com HTTP 200, 1102 bytes in 10.3s
+# --- gateway restarted: final v0.1.0 binary (REST log label no longer says 'rest rest') ---
+08:39:13 cosmosmix gateway on http://127.0.0.1:26657  (default chain "nyx"; SOCKS5 127.0.0.1:1086)
+08:39:13 cosmosmix REST gateway on http://127.0.0.1:1317  (default chain "nyx"; SOCKS5 127.0.0.1:1086)
+08:39:21 nyx rest /cosmos/bank/v1beta1/balances/* -> mixnet -> api.nymtech.net HTTP 200, 93 bytes in 6.5s
+08:39:27 osmosis rest /cosmos/base/tendermint/v1beta1/blocks/latest -> mixnet -> osmosis-rest.publicnode.com HTTP 200, 28725 bytes in 6.3s

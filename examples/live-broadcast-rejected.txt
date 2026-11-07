@@ -1,0 +1,17 @@
+# 2026-11-07T07:27:19Z broadcast_tx_sync of 16 junk bytes (not a transaction) over the real Nym mainnet mixnet; no real tx was sent
+$ cosmosmix broadcast 3q2+796tvu/erb7v3q2+7w== --chain nyx -v
+[   2.29s] dns  rpc.nymtech.net -> [194.182.169.49 91.92.200.116] (DoH via 1.1.1.1, over the mixnet, 2.29s)
+[   2.29s] dial rpc.nymtech.net:443 -> socks5 127.0.0.1:1086 -> mixnet -> exit -> 91.92.200.116:443
+[   2.30s] open rpc.nymtech.net:443 socks5 CONNECT accepted by the local mixnet client in 0.00s
+[   5.17s] up   rpc.nymtech.net broadcast_tx_sync answered HTTP 200 in 5.17s
+rejected by the node: code 2 (sdk): invalid length; proto: variable length integer overflow: tx parse error: tx parse error
+tx hash FD1679FAB79576A8F134EA26BD23797D080DFF39BD6297E005DC45C62B71C8F6 (via rpc.nymtech.net over the mixnet)
+(exit code 1)
+
+$ cosmosmix broadcast 3q2+796tvu/erb7v3q2+7w== --chain osmosis
+rejected by the node: code 1 (undefined): failed to decode tx: invalid length; proto: variable length integer overflow: tx parse error [cosmos/cosmos-sdk@v0.50.15/x/auth/tx/decoder.go:23]
+tx hash FD1679FAB79576A8F134EA26BD23797D080DFF39BD6297E005DC45C62B71C8F6 (via osmosis-rpc.publicnode.com over the mixnet)
+(exit code 1)
+
+$ cosmosmix broadcast not-base64!   # refused locally
+cosmosmix: not a base64-encoded signed transaction

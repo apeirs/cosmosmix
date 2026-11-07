@@ -1,0 +1,61 @@
+# 2026-11-07T07:28:39Z unmodified curl against cosmosmix serve (gateway log: live-gateway.log)
+
+$ curl -s --max-time 120 'http://127.0.0.1:26657/nyx/rpc/status' | python3 -c 'import json,sys; r=json.load(sys.stdin)["result"]; print(r["node_info"]["network"], r["sync_info"]["latest_block_height"], r["sync_info"]["latest_block_time"])'
+nyx 26440500 2026-11-07T07:28:38.417228808Z
+
+(wall time 5.6 s)
+
+$ curl -s --max-time 120 'http://127.0.0.1:26657/nyx/rpc/abci_query?path=%22/app/version%22'
+{"jsonrpc":"2.0","id":-1,"result":{"response":{"code":0,"log":"","info":"","index":"0","key":null,"value":"djAuNjEuMTY=","proofOps":null,"height":"26440500","codespace":"sdk"}}}
+
+(wall time 1.1 s)
+
+$ curl -s --max-time 120 -X POST -H 'Content-Type: application/json' -d '{"jsonrpc":"2.0","id":7,"method":"abci_info","params":{}}' http://127.0.0.1:26657/osmosis/rpc
+{"jsonrpc":"2.0","id":7,"result":{"response":{"data":"OsmosisApp","version":"32.0.0","last_block_height":"74371610","last_block_app_hash":"PRMBOaDDdsvy5ST6uU9lLSy4vED6gLtChel7dq9X8uQ="}}}
+
+(wall time 5.2 s)
+
+$ curl -s --max-time 120 'http://127.0.0.1:26657/cosmoshub/rest/cosmos/base/tendermint/v1beta1/blocks/latest' | python3 -c 'import json,sys; h=json.load(sys.stdin)["block"]["header"]; print(h["chain_id"], h["height"], h["time"])'
+cosmoshub-4 33765103 2026-11-07T07:28:49.830983905Z
+
+(wall time 9.8 s)
+
+$ curl -s --max-time 120 'http://127.0.0.1:26657/celestia/rest/cosmos/bank/v1beta1/supply/by_denom?denom=utia'
+{"amount":{"denom":"utia","amount":"1181331024713852"}}
+
+(wall time 7.3 s)
+
+$ curl -s --max-time 120 'http://127.0.0.1:1317/cosmos/bank/v1beta1/balances/n10c7h7wae558d5zejysktztheca6t3gc3vrnep9'   # bare REST listener, default chain nyx
+{"balances":[{"denom":"unym","amount":"9996089"}],"pagination":{"next_key":null,"total":"1"}}
+
+(wall time 5.4 s)
+
+$ curl -s --max-time 120 -X POST -d '{"jsonrpc":"2.0","id":1,"method":"status","params":{}}' http://127.0.0.1:26657/ | python3 -c 'import json,sys; print(json.load(sys.stdin)["result"]["node_info"]["network"])'   # root = default chain RPC
+nyx
+
+(wall time 1.2 s)
+
+$ curl -s --max-time 30 -o /dev/null -w '%{http_code}\n' -H 'Host: evil.example' http://127.0.0.1:26657/nyx/rpc/status   # DNS-rebinding guard
+403
+
+(wall time 0.0 s)
+
+$ curl -s --max-time 30 -w ' -> HTTP %{http_code}\n' -H 'Origin: https://evil.example' http://127.0.0.1:26657/nyx/rpc/status   # web page origin refused
+origin not allowed (see --allow-origin)
+ -> HTTP 403
+
+(wall time 0.0 s)
+
+$ curl -s --max-time 120 -o /dev/null -w '%{http_code} %header{access-control-allow-origin}\n' -H 'Origin: chrome-extension://dmkamcknogkgcdfhhbddcghachkejeap' -H 'Cookie: s=1' -H 'Referer: https://x.example/' http://127.0.0.1:26657/nyx/rpc/health   # extension origin allowed, headers stripped
+200 chrome-extension://dmkamcknogkgcdfhhbddcghachkejeap
+
+(wall time 1.2 s)
+# 2026-11-07T07:38:11Z after the restart: same gateway, unmodified curl
+$ curl -s http://127.0.0.1:26657/nyx/rpc/status    # prints result.sync_info.latest_block_height
+26440601
+$ curl -s http://127.0.0.1:26657/osmosis/rpc/status    # prints result.sync_info.latest_block_height
+74372302
+$ curl -s http://127.0.0.1:26657/cosmoshub/rpc/status    # prints result.sync_info.latest_block_height
+33765204
+$ curl -s http://127.0.0.1:26657/celestia/rpc/status    # prints result.sync_info.latest_block_height
+15666785

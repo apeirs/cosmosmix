@@ -1,0 +1,41 @@
+# 2026-11-07T07:26:51Z bank balances via REST over the real Nym mainnet mixnet (exit node 1981, AU)
+# non-Nyx addresses are each chain's public distribution module account
+
+$ cosmosmix balance n10c7h7wae558d5zejysktztheca6t3gc3vrnep9 --chain nyx -v
+[   2.47s] dns  api.nymtech.net -> [91.92.200.116 194.182.169.49] (DoH via 1.1.1.1, over the mixnet, 2.47s)
+[   2.47s] dial api.nymtech.net:443 -> socks5 127.0.0.1:1086 -> mixnet -> exit -> 194.182.169.49:443
+[   2.47s] open api.nymtech.net:443 socks5 CONNECT accepted by the local mixnet client in 0.00s
+[   5.77s] up   api.nymtech.net rest /cosmos/bank/v1beta1/balances/* answered HTTP 200 in 5.77s
+n10c7h7wae558d5zejysktztheca6t3gc3vrnep9 on nyx (via api.nymtech.net over the mixnet):
+  9.996089 NYM
+(wall time 5.8 s)
+
+$ cosmosmix balance osmo1jv65s3grqf6v6jl3dp4t6c9t9rk99cd80yhvld --chain osmosis
+osmo1jv65s3grqf6v6jl3dp4t6c9t9rk99cd80yhvld on osmosis (via osmosis-rest.publicnode.com over the mixnet):
+  72993690.381739 OSMO
+  542792503656 factory/osmo147h5x9pcj7lm0cttlaefx6sqq5vdfnmwfcqxkmjd7exqm9gc7grqhr75m0/alloyed/allUSDC
+  105137050 factory/osmo17fel472lgzs87ekt9dvk0zqyh5gl80sqp4sk4n/LAB
+  42 factory/osmo1dv8wz09tckslr2wy5z86r46dxvegylhpt97r9yd6qc3kyc6tv42qa89dr9/ampOSMO
+  1470270313 factory/osmo1em6xs47hd82806f5cxgyufguxrrc7l0aqx7nzzptjuqgswczk8csavdxek/alloyed/allUSDT
+  31361091363693601482 factory/osmo1k6c8jln7ejuqwtqmay3yvzrg3kueaczl96pk067ldg8u835w0yhsw27twm/alloyed/allETH
+  ... and 16 more denoms (--all or --json to list them)
+(wall time 4.8 s)
+
+$ cosmosmix balance cosmos1jv65s3grqf6v6jl3dp4t6c9t9rk99cd88lyufl --chain cosmoshub
+cosmos1jv65s3grqf6v6jl3dp4t6c9t9rk99cd88lyufl on cosmoshub (via cosmos-rest.publicnode.com over the mixnet):
+  26749498.617154 ATOM
+  2 cosmosvaloper1gf3dm2mvqhymts6ksrstlyuu2m8pw6dhfp9md2/114786
+  7487846325 ibc/0025F8A87464A471E66B234C4F93AEC5B4DA3D42D7986451A059273426290DD5
+  6189707349 ibc/054892D6BB43AF8B93AAC28AA5FD7019D2C59A15DAFD6F45C1FA2BF9BDA22454
+  167497 ibc/05C7702E4C88217C9D9E3EC63EF3B90B4BBC4B75F213E201295F35C9D89416AD
+  260124777422 ibc/0872AF0D1B0F6F23BA67631F9A4AFF633F289EE7B390478D7BA4F064A5135162
+  ... and 44 more denoms (--all or --json to list them)
+(wall time 5.5 s)
+
+$ cosmosmix balance celestia1jv65s3grqf6v6jl3dp4t6c9t9rk99cd8k44vnj --chain celestia
+celestia1jv65s3grqf6v6jl3dp4t6c9t9rk99cd8k44vnj on celestia (via celestia-rest.publicnode.com over the mixnet):
+  28417125.97369 TIA
+(wall time 4.9 s)
+
+$ cosmosmix balance osmo1jv65s3grqf6v6jl3dp4t6c9t9rk99cd80yhvld --chain nyx   # wrong prefix: refused locally, nothing sent
+cosmosmix: address prefix "osmo" does not match chain nyx (prefix "n"); pass --chain

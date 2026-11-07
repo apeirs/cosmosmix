@@ -1,0 +1,28 @@
+# 2026-11-07T07:27:33Z every built-in upstream through the real Nym mainnet mixnet (exit node 1981, AU), 4 at a time
+$ cosmosmix probe --chain all
+CHAIN      KIND  UPSTREAM                         RESULT          TIME
+nyx        rpc   rpc.nymtech.net                  block 26440489  5.7s
+nyx        rpc   nym-rpc.polkachu.com             block 26440489  6.9s
+nyx        rpc   rpc.nyx.nodes.guru               block 26440489  5.6s
+nyx        rest  api.nymtech.net                  block 26440489  5.7s
+nyx        rest  nym-api.polkachu.com             block 26440488  5.3s
+nyx        rest  api.nyx.nodes.guru               block 26440490  5.8s
+cosmoshub  rpc   cosmos-rpc.publicnode.com        block 33765091  4.3s
+cosmoshub  rpc   rpc.lavenderfive.com/cosmoshub   block 33765091  7.0s
+cosmoshub  rpc   rpc-cosmoshub.ecostake.com       block 33765095  7.0s
+cosmoshub  rest  cosmos-rest.publicnode.com       block 33765094  6.6s
+cosmoshub  rest  rest.lavenderfive.com/cosmoshub  block 33765089  6.6s
+cosmoshub  rest  rest-cosmoshub.ecostake.com      block 33765093  7.0s
+osmosis    rpc   osmosis-rpc.publicnode.com       block 74371560  8.3s
+osmosis    rpc   rpc.osmosis.zone                 block 74371551  6.4s
+osmosis    rpc   rpc.lavenderfive.com/osmosis     block 74371553  1.6s
+osmosis    rest  osmosis-rest.publicnode.com      block 74371560  6.4s
+osmosis    rest  lcd.osmosis.zone                 block 74371524  6.2s
+osmosis    rest  osmosis-api.polkachu.com         block 74371543  5.5s
+celestia   rpc   celestia-rpc.publicnode.com      block 15666557  4.8s
+celestia   rpc   public-celestia-rpc.numia.xyz    block 15666556  5.9s
+celestia   rpc   rpc.lavenderfive.com/celestia    block 15666556  1.2s
+celestia   rest  celestia-rest.publicnode.com     block 15666558  9.0s
+celestia   rest  public-celestia-lcd.numia.xyz    block 15666558  9.3s
+celestia   rest  rest.lavenderfive.com/celestia   block 15666551  6.7s
+24 of 24 upstreams answered through the mixnet

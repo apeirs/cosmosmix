@@ -1,0 +1,15 @@
+# 2026-11-07T07:39:13Z mixnet client unreachable (SOCKS5 pointed at a closed port): cosmosmix refuses, never connects directly
+$ cosmosmix balance n10c7h7wae558d5zejysktztheca6t3gc3vrnep9 --chain nyx --proxy 127.0.0.1:1099
+cosmosmix: api.nymtech.net: no SOCKS5 proxy (nym-socks5-client) listening; refusing to fall back to a direct connection (127.0.0.1:1099: dial tcp 127.0.0.1:1099: connect: connection refused)
+(exit code 1)
+
+$ cosmosmix serve --listen 127.0.0.1:26699 --proxy 127.0.0.1:1099 &
+$ curl -X POST -d {"method":"status",...} http://127.0.0.1:26699/nyx/rpc
+{"jsonrpc":"2.0","id":-1,"error":{"code":-32603,"message":"Internal error","data":"cosmosmix: all upstreams failed over the mixnet (no clearnet fallback): rpc.nymtech.net: no SOCKS5 proxy (nym-socks5-client) listening; refusing to fall back to a direct connection (127.0.0.1:1099: dial tcp 127.0.0.1:1099: connect: connection refused)"}}  -> HTTP 502
+$ curl http://127.0.0.1:26699/nyx/rest/cosmos/bank/v1beta1/balances/n10c7h7wae558d5zejysktztheca6t3gc3vrnep9
+{"code":14,"message":"cosmosmix: all upstreams failed over the mixnet (no clearnet fallback): api.nymtech.net: no SOCKS5 proxy (nym-socks5-client) listening; refusing to fall back to a direct connection (127.0.0.1:1099: dial tcp 127.0.0.1:1099: connect: connection refused)","details":[]}  -> HTTP 502
+
+# gateway log of that run (the address does not appear):
+08:39:13 cosmosmix gateway on http://127.0.0.1:26699  (default chain "nyx"; SOCKS5 127.0.0.1:1099)
+08:39:14 nyx rpc status FAILED after 0.0s: rpc.nymtech.net: no SOCKS5 proxy (nym-socks5-client) listening; refusing to fall back to a direct connection (127.0.0.1:1099: dial tcp 127.0.0.1:1099: connect: connection refused)
+08:39:14 nyx rest /cosmos/bank/v1beta1/balances/* FAILED after 0.0s: api.nymtech.net: no SOCKS5 proxy (nym-socks5-client) listening; refusing to fall back to a direct connection (127.0.0.1:1099: dial tcp 127.0.0.1:1099: connect: connection refused)
