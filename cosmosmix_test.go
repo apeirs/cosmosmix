@@ -481,3 +481,64 @@ func TestBuiltinChains(t *testing.T) {
 		}
 	}
 }
+
+// The upstream is a real, directly reachable TLS server on localhost. With
+// the mixnet client down, nothing may reach it, in either DNS mode and at any
+// layer (gateway RPC, gateway REST, CLI client): a direct dial would land here
+// and be counted.
+func TestNoFallbackEvenWhenDirectWouldWork(t *testing.T) {
+	ca := fakes.NewCA()
+	var mu sync.Mutex
+	hits := 0
+	ln, err := tls.Listen("tcp", "127.0.0.1:0", &tls.Config{Certificates: []tls.Certificate{ca.Leaf("localhost", "127.0.0.1")}})
+	if err != nil {
+		t.Fatal(err)
+	}
+	srv := &http.Server{Handler: http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
+		mu.Lock()
+		hits++
+		mu.Unlock()
+		io.WriteString(rw, `{"jsonrpc":"2.0","id":1,"result":{}}`)
+	})}
+	go srv.Serve(ln)
+	defer srv.Close()
+	// Nothing listens on this port at all (a listener that doesn't speak
+	// SOCKS would test a different failure).
+	dl, _ := net.Listen("tcp", "127.0.0.1:0")
+	dead := dl.Addr().String()
+	dl.Close()
+	_, port, _ := net.SplitHostPort(ln.Addr().String())
+	ups := []string{"https://localhost:" + port, "https://127.0.0.1:" + port}
+	reg := cosmos.NewRegistry()
+	if err := reg.Add("localnet", ups, false); err != nil {
+		t.Fatal(err)
+	}
+	if err := reg.Add("localnet", ups, true); err != nil {
+		t.Fatal(err)
+	}
+	for _, mode := range []string{mixnet.DNSDoH, mixnet.DNSExit} {
+		cl := &cosmos.Client{D: &mixnet.Dialer{Proxy: dead, DNS: mode, RootCAs: ca.Pool, Timeout: time.Second}, Timeout: 3 * time.Second}
+		gw := httptest.NewServer(&gateway.Gateway{Client: cl, Chains: reg, Default: "localnet"})
+		resp, body := do(t, "POST", gw.URL+"/localnet/rpc", nil, `{"jsonrpc":"2.0","id":1,"method":"status"}`)
+		if resp.StatusCode != 502 || !strings.Contains(body, "no SOCKS5 proxy") {
+			t.Errorf("dns=%s RPC: want 502, got %d %s", mode, resp.StatusCode, body)
+		}
+		resp, body = do(t, "GET", gw.URL+"/localnet/rest/cosmos/base/tendermint/v1beta1/node_info", nil, "")
+		if resp.StatusCode != 502 {
+			t.Errorf("dns=%s REST: want 502, got %d %s", mode, resp.StatusCode, body)
+		}
+		gw.Close()
+		if _, _, err := cl.RPC(context.Background(), ups, "status", nil); err == nil {
+			t.Errorf("dns=%s: CLI RPC answered without the mixnet", mode)
+		}
+		var v map[string]any
+		if _, err := cl.REST(context.Background(), ups, "/cosmos/base/tendermint/v1beta1/node_info", "", &v); err == nil {
+			t.Errorf("dns=%s: CLI REST answered without the mixnet", mode)
+		}
+	}
+	mu.Lock()
+	defer mu.Unlock()
+	if hits != 0 {
+		t.Fatalf("the upstream was reached directly %d times", hits)
+	}
+}
